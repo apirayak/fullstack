@@ -59,7 +59,7 @@ export default {
     },
     handleClick: function() {
         console.log(this.users);
-      alert("test " + this.users[1]['name']);
+      alert("test " + this.users[1]);
     }
   }
 };
