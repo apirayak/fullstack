@@ -69,7 +69,7 @@
 </template>
 
 <style lang="scss" scoped>
-.org-description {
+  .org-description {
   margin-top: 50px;
 }
 div.a {
