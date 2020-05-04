@@ -8,6 +8,10 @@ const pool = new Pool({
   port: 3333,
 })
 
+//StaffInfo
+//StaffInfo
+//StaffInfo
+//StaffInfo
 const getUsers = (request, response) => {
     pool.query('SELECT * FROM "StaffInfo" ORDER BY "StaffId" ASC', (error, results) => {
       if (error) {
@@ -66,10 +70,79 @@ const getUsers = (request, response) => {
     })
   }
 
+//StudentInfo
+//StudentInfo
+//StudentInfo
+//StudentInfo
+
+const getSchool = (request, response) => {
+  pool.query('SELECT * FROM "School" ORDER BY "SchoolID" ASC', (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
+
+const getSchoolById = (request, response) => {
+  const id = parseInt(request.params.id)
+
+  pool.query('SELECT * FROM "School" WHERE "SchoolID" = $1', [id], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
+
+const createSchool = (request, response) => {
+  const { id, username, schoolid, name, email, phone, position } = request.body
+
+  pool.query('INSERT INTO "School" ("StaffId", "Username", "SchoolID", "Name","Email","Phone","Position") VALUES ($1, $2, $3, $4, $5, $6, $7)', [id, username, schoolid, name, email, phone, position], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(201).send(`User added with ID: ${results.name}`)
+  })
+}
+
+const updateSchool = (request, response) => {
+  const id = parseInt(request.params.id)
+  const { name, email } = request.body
+
+  pool.query(
+    'UPDATE School SET name = $1, email = $2 WHERE id = $3',
+    [name, email, id],
+    (error, results) => {
+      if (error) {
+        throw error
+      }
+      response.status(200).send(`User modified with ID: ${id}`)
+    }
+  )
+}
+
+const deleteSchool = (request, response) => {
+  const id = parseInt(request.params.id)
+
+  pool.query('DELETE FROM School WHERE id = $1', [id], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).send(`User deleted with ID: ${id}`)
+  })
+}
+
   module.exports = {
     getUsers,
     getUserById,
     createUser,
     updateUser,
     deleteUser,
+
+    getSchool,
+    getSchoolById,
+    createSchool,
+    updateSchool,
+    deleteSchool
   }

@@ -58,8 +58,7 @@ export default {
         });
     },
     handleClick: function() {
-        console.log(this.users);
-      alert("test " + this.users[1]);
+      alert("test " + this.users);
     }
   }
 };

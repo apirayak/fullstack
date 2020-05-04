@@ -1,6 +1,7 @@
 import http from "../http-common";
 
 class DataService {
+    //Staff
     getUsers() {
         return http.get("/users");
     }
@@ -16,6 +17,23 @@ class DataService {
     deleteUser(id) {
         return http.delete(`/users/${id}`);
     }
+    //School
+    getSchool() {
+        return http.get("/schools");
+    }
+    getSchoolById(id) {
+        return http.get(`/schools/${id}`);
+    }
+    createSchool(data) {
+        return http.post("/schools", data);
+    }
+    updateSchool(id, data) {
+        return http.put(`/schools/${id}`, data);
+    }
+    deleteSchool(id) {
+        return http.delete(`/schools/${id}`);
+    }
+    
 }
 
 export default new DataService();

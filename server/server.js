@@ -19,11 +19,32 @@ app.get("/", (req, res) => {
   res.status(200).send("หน้าแรกของ api express");
 });
 
+//StaffInfo
 app.get('/users', db.getUsers)
 app.get('/users/:id', db.getUserById)
 app.post('/users', db.createUser)
 app.put('/users/:id', db.updateUser)
 app.delete('/users/:id', db.deleteUser)
+//Country
+
+//MeasuermentRecord
+
+//School
+app.get('/schools', db.getSchool)
+app.get('/schools/:id', db.getSchoolById)
+app.post('/schools', db.createSchool)
+app.put('/schools/:id', db.updateSchool)
+app.delete('/schools/:id', db.deleteSchool)
+
+//StudentInfo
+// app.get('/students', db.getStudent)
+// app.get('/students/:id', db.getStudentById)
+// app.post('/students', db.createStudent)
+// app.put('/students/:id', db.updateStudent)
+// app.delete('/students/:id', db.deleteStudent)
+
+//UserLogin
+
 
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)
