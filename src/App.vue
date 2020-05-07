@@ -1,18 +1,23 @@
 <template>
   <div id="app">
-    <nav>
-        <router-link to='/'>Home</router-link>
-        <router-link to='/addschool'>AddSchool</router-link>
-        <router-link to='/login'>Login</router-link>
-    </nav>
-    <router-view />
+        <Nav />
+    <router-view/>
+    <!-- <Nav />
+    <router-link to="/">Home</router-link>
+    <router-link to="/addschool">AddSchool</router-link>
+    <router-link to="/login">Login</router-link> -->
   </div>
 </template>
 
 <script>
+import Nav from "./components/partials/Nav.vue";
 
 export default {
-}
+  name: "app",
+  components: {
+    Nav
+  }
+};
 </script>
 
 <style>

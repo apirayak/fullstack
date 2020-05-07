@@ -1,7 +1,7 @@
 // routes.js
 import Home from '../components/Home.vue';
 import AddSchool from '../components/AddSchool.vue';
-import Login from '../components/Login.vue';
+import Login from '../views/auth/Login.vue';
 
 
 const routes = [

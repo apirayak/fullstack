@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="home">
     <h1>Test App</h1>
     <button @click="handleClick">click me!</button>
     <div>{{users}}</div>
@@ -38,6 +38,7 @@
 import DataService from "../services/DataService";
 
 export default {
+  name: 'home',
   data() {
     return {
       users: []

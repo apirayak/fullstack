@@ -1,22 +1,20 @@
 const express = require('express')
-const bodyParser = require('body-parser')
 const app = express()
 const db = require('./config/db.config')
 const port = 3000
+const bodyParser = require('body-parser')
+
 
 var cors = require('cors')
 app.use(cors())
 
-app.use(bodyParser.json())
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
-  })
-)
 
-// ข้อความสำหรับ path หน้าแรกของ express เรา (localhost:5000/)
-app.get("/", (req, res) => {
-  res.status(200).send("หน้าแรกของ api express");
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+
+// ข้อความสำหรับ path หน้าแรกของ express เรา (localhost:3000/)
+app.get('/', (req, res) => {
+  res.status(200).send(`หน้าแรกของ api express`);
 });
 
 //StaffInfo
@@ -30,11 +28,11 @@ app.delete('/users/:id', db.deleteUser)
 //MeasuermentRecord
 
 //School
-app.get('/schools', db.getSchool)
-app.get('/schools/:id', db.getSchoolById)
-app.post('/schools', db.createSchool)
-app.put('/schools/:id', db.updateSchool)
-app.delete('/schools/:id', db.deleteSchool)
+// app.get('/schools', db.getSchool)
+// app.get('/schools/:id', db.getSchoolById)
+// app.post('/schools', db.createSchool)
+// app.put('/schools/:id', db.updateSchool)
+// app.delete('/schools/:id', db.deleteSchool)
 
 //StudentInfo
 // app.get('/students', db.getStudent)
@@ -52,7 +50,7 @@ app.listen(port, () => {
 
 // ข้อความสำหรับใส่ path ผิด (localhost:5000/asdfghjkl;)
 app.use((req, res, next) => {
-  var err = new Error("ไม่พบ path ที่คุณต้องการ");
+  var err = new Error(`ไม่พบ path ที่คุณต้องการ`);
   err.status = 404;
   next(err);
 });
