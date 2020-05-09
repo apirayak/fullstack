@@ -3,13 +3,15 @@ import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
 import './../node_modules/bulma/css/bulma.css';
-
+import store from './store'
 
 import routes from './router/index';
 
 // ประกาศ Axios
 import VueAxios from "vue-axios";
 import axios from "axios";
+// set auth header
+axios.defaults.headers.common['Authorization'] = `Bearer ${store.state.token}`;
 
 Vue.config.productionTip = false
 
@@ -22,5 +24,6 @@ const router = new VueRouter({routes});
 
 new Vue({
   router,
+  store,
   render: h => h(App),
 }).$mount('#app')

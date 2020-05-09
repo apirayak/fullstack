@@ -28,10 +28,10 @@ class DataService {
         return http.post("/schools", data);
     }
     updateSchool(id, data) {
-        return http.put(`/schools/${id}`, data);
+        return http.put(`/school/${id}`, data);
     }
     deleteSchool(id) {
-        return http.delete(`/schools/${id}`);
+        return http.delete(`/school/${id}`);
     }
     
 }

@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 const Pool = require('pg').Pool
 const pool = new Pool({
-  user: 'yongapi',
+  user: 'postgres',
   host: 'localhost',
-  database: 'ChildGrowth',
+  database: 'childgrowth',
   password: '123',
   port: 3333,
 })
@@ -23,7 +23,6 @@ const getUsers = (request, response) => {
 
   const getUserById = (request, response) => {
     const id = parseInt(request.params.id)
-  
     pool.query('SELECT * FROM "StaffInfo" WHERE "StaffId" = $1', [id], (error, results) => {
       if (error) {
         throw error
@@ -33,6 +32,8 @@ const getUsers = (request, response) => {
   }
 
   const createUser = (request, response) => {
+    // INSERT INTO "StaffInfo" ("StaffId", "Username", "SchoolID", "Name","Email","Phone","Position") VALUES ('1111', 'testuser', '1', 'Test', 'test@mail.com', '0123456789', 'Teacher');
+    // INSERT INTO "StaffInfo" ("StaffId", "Username", "SchoolID", "Name","Email","Phone","Position") VALUES ('2222', 'Testuser2', '2', 'Test2', 'test2@mail.com', '0000000000', 'Teacher');
     const { id, username, schoolid, name, email, phone, position } = request.body
     pool.query('INSERT INTO "StaffInfo" ("StaffId", "Username", "SchoolID", "Name","Email","Phone","Position") VALUES ($1, $2, $3, $4, $5, $6, $7)', [id, username, schoolid, name, email, phone, position], (error, results) => {
       if (error) {

@@ -20,9 +20,14 @@
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <a class="button is-dark">
-            <strong>Sign In</strong>
-          </a>
+              <a class="button is-dark">
+                  <router-link
+                    v-if="authenticated"
+                    to="/login"
+                    v-on:click.native="logout()"
+                    replace
+                  >Logout</router-link>
+                </a>
         </div>
       </div>
     </div>

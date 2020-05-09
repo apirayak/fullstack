@@ -8,6 +8,9 @@ const bodyParser = require('body-parser')
 var cors = require('cors')
 app.use(cors())
 
+// add routes
+const router = require('./routes/router.js');
+app.use('/api', router);
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))

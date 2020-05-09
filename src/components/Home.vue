@@ -1,66 +1,76 @@
 <template>
-  <div class="home">
-    <h1>Test App</h1>
-    <button @click="handleClick">click me!</button>
-    <div>{{users}}</div>
-
-
-    <div class="container">
-      <div class="columns">
-        <div class="column">
-          <p class="is-size-6 has-text-weight-semibold">ชื่อ</p>
-        </div>
-        <div class="column">
-          <p class="is-size-6 has-text-weight-semibold">นามสกุล</p>
-        </div>
-        <div class="column">
-          <p class="is-size-6 has-text-weight-semibold">อายุ</p>
-        </div>
-      </div>
-      <div v-for="item in users" :key="item.id">
-        <div class="columns">
-          <div class="column">
-            <p class="is-size-6">{{item.id}}</p>
-          </div>
-          <div class="column">
-            <p class="is-size-6">{{item.name}}</p>
-          </div>
-          <div class="column">
-            <p class="is-size-6">{{item.email}}</p>
-          </div>
+<div class="home">
+  <section class="hero is-dark">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          Welcome to Child Growth        
+        </h1>
+        <h2 class="subtitle">
+          Just a little bit description
+        </h2>
+        <div class="button-block">
+          <button class="button is-xl is-dark">Test button</button>
         </div>
       </div>
     </div>
-  </div>
+  </section>
+  <!-- <EventsList /> -->
+</div>
+
+
 </template>
 
 <script>
-import DataService from "../services/DataService";
+// import EventsList from '../components/EventsList';
 
 export default {
   name: 'home',
-  data() {
-    return {
-      users: []
-    };
-  },
-  mounted() {
-    this.retrieveUsers();
-  },
-  methods: {
-    retrieveUsers() {
-      DataService.getUsers()
-        .then(response => {
-          this.users = response.data;
-          console.log(response.data);
-        })
-        .catch(e => {
-          console.log(e);
-        });
-    },
-    handleClick: function() {
-      alert("test " + this.users);
+  components: {
+    // EventsList
+  }
+}
+</script>
+
+
+<style lang="scss" scoped>
+  .hero {  
+    text-align: center;
+    background-image: url('https://i1.wp.com/reachinghighernh.org/wp-content/uploads/2018/08/hero-PBS-7-Friendship-533180437.jpg?w=1113&ssl=1');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 400px;
+  }
+  .hero-body .title {
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.6);
+    padding: 40px 0 20px 0;
+    font-size: 60px;
+  }
+  .subtitle {
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.7);
+    font-size: 30px;
+  }
+  .button-block {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    position: absolute;
+    bottom: -150px;
+    .button {
+      margin-right: 50px;
+      padding-left: 50px;
+      padding-right: 50px;
+    }
+    .welcome {
+      width: 400px;
+      padding: 10px;
+      margin-left: auto;
+      margin-right: auto;
     }
   }
-};
-</script>
+  .is-xl {
+    font-size: 1.7rem;
+  }
+</style>
