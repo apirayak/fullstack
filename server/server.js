@@ -2,18 +2,17 @@ const express = require('express')
 const app = express()
 const db = require('./config/db.config')
 const port = 3000
+var cors = require('cors')
 const bodyParser = require('body-parser')
 
-
-var cors = require('cors')
+app.use(bodyParser.urlencoded({extended : true}));
+app.use(bodyParser.json());
 app.use(cors())
 
 // add routes
-const router = require('./routes/router.js');
-app.use('/api', router);
+// const router = require('./routes/router.js');
+// app.use('/', router);
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
 
 // ข้อความสำหรับ path หน้าแรกของ express เรา (localhost:3000/)
 app.get('/', (req, res) => {
@@ -31,21 +30,20 @@ app.delete('/users/:id', db.deleteUser)
 //MeasuermentRecord
 
 //School
-// app.get('/schools', db.getSchool)
+app.get('/schools', db.getSchools)
 // app.get('/schools/:id', db.getSchoolById)
 // app.post('/schools', db.createSchool)
 // app.put('/schools/:id', db.updateSchool)
 // app.delete('/schools/:id', db.deleteSchool)
 
 //StudentInfo
-// app.get('/students', db.getStudent)
+app.get('/students', db.getStudents)
 // app.get('/students/:id', db.getStudentById)
-// app.post('/students', db.createStudent)
+app.post('/students', db.createStudent)
 // app.put('/students/:id', db.updateStudent)
 // app.delete('/students/:id', db.deleteStudent)
-
+app.post('/login' , db.login)
 //UserLogin
-
 
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)

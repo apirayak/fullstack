@@ -30,8 +30,12 @@ class DataService {
     updateSchool(id, data) {
         return http.put(`/school/${id}`, data);
     }
-    deleteSchool(id) {
-        return http.delete(`/school/${id}`);
+    // Student
+    getStudent() {
+        return http.get("/students");
+    }
+    createStudent(data){
+        return http.post("/students",data)
     }
     
 }

@@ -5,7 +5,7 @@ const pool = new Pool({
   host: 'localhost',
   database: 'childgrowth',
   password: '123',
-  port: 3333,
+  port: 5432,
 })
 
 //StaffInfo
@@ -13,7 +13,7 @@ const pool = new Pool({
 //StaffInfo
 //StaffInfo
 const getUsers = (request, response) => {
-    pool.query('SELECT * FROM "StaffInfo" ORDER BY "StaffId" ASC', (error, results) => {
+    pool.query('SELECT * FROM staffinfo ORDER BY staffid ASC', (error, results) => {
       if (error) {
         throw error
       }
@@ -23,7 +23,7 @@ const getUsers = (request, response) => {
 
   const getUserById = (request, response) => {
     const id = parseInt(request.params.id)
-    pool.query('SELECT * FROM "StaffInfo" WHERE "StaffId" = $1', [id], (error, results) => {
+    pool.query('SELECT * FROM staffinfo WHERE staffid = $1', [id], (error, results) => {
       if (error) {
         throw error
       }
@@ -34,9 +34,11 @@ const getUsers = (request, response) => {
   const createUser = (request, response) => {
     // INSERT INTO "StaffInfo" ("StaffId", "Username", "SchoolID", "Name","Email","Phone","Position") VALUES ('1111', 'testuser', '1', 'Test', 'test@mail.com', '0123456789', 'Teacher');
     // INSERT INTO "StaffInfo" ("StaffId", "Username", "SchoolID", "Name","Email","Phone","Position") VALUES ('2222', 'Testuser2', '2', 'Test2', 'test2@mail.com', '0000000000', 'Teacher');
-    const { id, username, schoolid, name, email, phone, position } = request.body
-    pool.query('INSERT INTO "StaffInfo" ("StaffId", "Username", "SchoolID", "Name","Email","Phone","Position") VALUES ($1, $2, $3, $4, $5, $6, $7)', [id, username, schoolid, name, email, phone, position], (error, results) => {
+    const { name, studentid, recordid, schoolid, grade, classr, gender,age } = request.body
+    pool.query('INSERT INTO public.studentinfo (name, studentid, recordid, schoolid, grade, class, gender,age) VALUES ($1, $2,$3, $4, $5, $6, $7)', [name, studentid,recordid,schoolid, grade, classr, gender,age ], (error, results) => {
+    console.log(request.body)  
       if (error) {
+        
         throw error
       }
       response.status(201).send(`User added with ID: ${results.name}`)
@@ -75,14 +77,14 @@ const getUsers = (request, response) => {
 // //StudentInfo
 // //StudentInfo
 
-// const getSchool = (request, response) => {
-//   pool.query('SELECT * FROM "School" ORDER BY "SchoolID" ASC', (error, results) => {
-//     if (error) {
-//       throw error
-//     }
-//     response.status(200).json(results.rows)
-//   })
-// }
+const getStudents = (request, response) => {
+  pool.query('SELECT * FROM studentinfo ORDER BY studentid ASC', (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
 
 // const getSchoolById = (request, response) => {
 //   const id = parseInt(request.params.id)
@@ -95,16 +97,16 @@ const getUsers = (request, response) => {
 //   })
 // }
 
-// const createSchool = (request, response) => {
-//   const { id, username, schoolid, name, email, phone, position } = request.body
+const createStudent = (request, response) => {
+  const { name, studentid, schoolid, grade, classr, gender, age} = request.body
 
-//   pool.query('INSERT INTO "School" ("StaffId", "Username", "SchoolID", "Name","Email","Phone","Position") VALUES ($1, $2, $3, $4, $5, $6, $7)', [id, username, schoolid, name, email, phone, position], (error, results) => {
-//     if (error) {
-//       throw error
-//     }
-//     response.status(201).send(`User added with ID: ${results.name}`)
-//   })
-// }
+  pool.query('INSERT INTO studentinfo (name, studentid, schoolid, grade, class, gender,age) VALUES ($1, $2, $3, $4, $5, $6,$7)', [ name, studentid, schoolid ,grade, classr, gender, age], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(201).send(`User added with ID: ${results.name}`)
+  })
+}
 
 // const updateSchool = (request, response) => {
 //   const id = parseInt(request.params.id)
@@ -133,12 +135,52 @@ const getUsers = (request, response) => {
 //   })
 // }
 
+//school
+
+const getSchools = (request, response) => {
+  pool.query('SELECT * FROM school ORDER BY schoolid ASC', (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
+
+//login-register
+const login = function(request, response) {
+    var username = request.body.username;
+    var password = request.body.password;
+    if (username && password) {
+      pool.query('SELECT * FROM userlogin WHERE username = ? AND password = ?', [username, password], (error, results, fields) =>{
+        if (results.length) {
+          response.send('ถูกละจ้า');
+          // request.session.loggedin = true;
+          // request.session.username = username;
+          // response.redirect('/home');
+        } else {
+          response.send('Incorrect Username and/or Password!');
+        }			
+        response.end();
+      });
+    } else {
+      response.send('Please enter Username and Password!');
+      response.end();
+    }
+}
+
   module.exports = {
     getUsers,
     getUserById,
     createUser,
     updateUser,
     deleteUser,
+
+    getStudents,
+    createStudent,
+
+    getSchools,
+    pool,
+    login
 
     // getSchool,
     // getSchoolById,

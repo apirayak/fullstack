@@ -6,6 +6,7 @@ import collectdata from '../components/Collectdata.vue';
 import Profile from '../components/Profile.vue';
 import ShowStudent from '../components/ShowStudent.vue';
 import Signup from '../components/SignUp.vue';
+import Testlogin from '../components/testlogin.vue';
 
 const routes = [
     {
@@ -48,6 +49,11 @@ const routes = [
         path: '/sign-up',
         name: 'sign-up',
         component: Signup
+    },
+    {
+        path: '/testlogin',
+        name: 'testlogin',
+        component: Testlogin
     }
 ];
 
