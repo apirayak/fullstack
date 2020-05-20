@@ -53,7 +53,6 @@
 <script>
 import Nav from "./components/partials/Nav.vue";
 import store from "./store";
-
 export default {
   store,
   name: "app",

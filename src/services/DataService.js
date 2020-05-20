@@ -1,7 +1,12 @@
 import http from "../http-common";
 
 class DataService {
-    //Staff
+    //login
+    login() {
+        return http.post("/login");
+    }
+
+    //Users
     getUsers() {
         return http.get("/users");
     }
@@ -9,7 +14,7 @@ class DataService {
         return http.get(`/users/${id}`);
     }
     createUser(data) {
-        return http.post("/users", data);
+        return http.post("/user", data);
     }
     updateUser(id, data) {
         return http.put(`/users/${id}`, data);
@@ -17,7 +22,9 @@ class DataService {
     deleteUser(id) {
         return http.delete(`/users/${id}`);
     }
-    //School
+
+
+    //Schools
     getSchool() {
         return http.get("/schools");
     }
@@ -30,6 +37,7 @@ class DataService {
     updateSchool(id, data) {
         return http.put(`/school/${id}`, data);
     }
+
     // Student
     getStudent() {
         return http.get("/students");
@@ -37,6 +45,7 @@ class DataService {
     createStudent(data){
         return http.post("/students",data)
     }
+
     
 }
 

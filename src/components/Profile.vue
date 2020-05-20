@@ -10,6 +10,7 @@
 
     <!-- profile -->
     <div class="a">
+        <button @click="onExport" >Export</button> เพิ่มปุ่ม Export
       <div v-for="item in users" :key="item.id">
         <div class="field">
           <label class="label">StaffID : {{item.staffid}}</label>
@@ -50,6 +51,7 @@
 
 <script>
 import DataService from "../services/DataService";
+import XLSX from 'xlsx' // import xlsx
 
 export default {
   name: "app",
@@ -72,6 +74,12 @@ export default {
         .catch(e => {
           console.log(e);
         });
+    },
+    onExport() {
+      const dataWS = XLSX.utils.json_to_sheet(this.json)
+      const wb = XLSX.utils.book_new()
+      XLSX.utils.book_append_sheet(wb, dataWS)
+      XLSX.writeFile(wb,'export.xlsx')
     },
     getInputValue() {
       // Selecting the input element and get its value

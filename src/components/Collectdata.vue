@@ -49,13 +49,13 @@
         <input class="input" v-model="studentid" type="text" placeholder="Student ID" />
       </div>
     </div>
-        <div class="field is-centered">
+    <div class="field is-centered">
       <label class="label">school ID</label>
       <div class="control is-centered">
         <input class="input" v-model="schoolid" type="text" placeholder="school ID" />
       </div>
     </div>
-    
+
     <label class="label">Name</label>
     <div class="field is-grouped">
       <p class="control is-expanded">
@@ -90,7 +90,8 @@
 
     <div class="control is-expanded">
       <label class="label">Grade</label>
-      <div class="select">"
+      <div class="select">
+        "
         <select name="grade" @change="handleChange($event)" v-model="grade">
           <option value="0">Select student grade</option>
           <option value="1">1</option>
@@ -167,18 +168,21 @@ export default {
         gender:this.picked,
         age: this.age,
         grade: this.grade,
-        classr: this.classr,
-        weight: this.weight,
-        height: this.height
+        classr: this.classr
       }
-      DataService.createStudent(obj)
-
+      if (this.studentid != "" && this.firstname != "" && this.lastname != "" &&
+          this.schoolid != "" && this.picked != "" && this.age != "" &&
+          this.grade != "" && this.classr != "") {
+        DataService.createStudent(obj)
         .then(response => {
           console.log(response.data);
         })
         .catch(e => {
           console.log(e);
         });
+      } else {
+        alert("Please Fill All Required Field");
+      }
     },
     handleClick: function() {
       alert("test " + this.users);

@@ -9,12 +9,6 @@ app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
 app.use(cors())
 
-// add routes
-// const router = require('./routes/router.js');
-// app.use('/', router);
-
-
-// ข้อความสำหรับ path หน้าแรกของ express เรา (localhost:3000/)
 app.get('/', (req, res) => {
   res.status(200).send(`หน้าแรกของ api express`);
 });
@@ -22,9 +16,10 @@ app.get('/', (req, res) => {
 //StaffInfo
 app.get('/users', db.getUsers)
 app.get('/users/:id', db.getUserById)
-app.post('/users', db.createUser)
-app.put('/users/:id', db.updateUser)
-app.delete('/users/:id', db.deleteUser)
+app.post('/user', db.createUser)
+app.put('/user/:id', db.updateUser)
+app.delete('/user/:id', db.deleteUser)
+
 //Country
 
 //MeasuermentRecord
@@ -43,6 +38,7 @@ app.post('/students', db.createStudent)
 // app.put('/students/:id', db.updateStudent)
 // app.delete('/students/:id', db.deleteStudent)
 app.post('/login' , db.login)
+app.post('/register', db.register)
 //UserLogin
 
 app.listen(port, () => {

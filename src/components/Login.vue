@@ -55,35 +55,35 @@
 </template>
 
 <script>
-// import firebase from "firebase";
+import DataService from "../services/DataService";
 
 export default {
   name: "Login",
   data() {
     return {
       username: "",
-      password: "",
-      stateLogin: false
+      password: ""
     };
   },
   methods: {
     login() {
-      if (this.username != "" && this.password != "") {
-        if (
-          this.username == this.$parent.mockAccount.username &&
-          this.password == this.$parent.mockAccount.password
-        ) {
-          this.$emit("authenticated", true);
-          this.$router.replace({ name : "home"});
-        } else {
-          alert("The username and / or password is incorrect");
-          console.log("The username and / or password is incorrect");
-        }
+      let obj = {
+        username: this.username,
+        password: this.password
+      };
+      if (!this.username != "" && this.password != "") {
+        DataService.login(obj)
+          .then(response => {
+            console.log(response.data);
+          })
+          .catch(e => {
+            console.log(e);
+          });
       } else {
-        alert("Please Fill All Required Field");
+        alert("Login success!");
         console.log("A username and password must be present");
       }
-    },
+    }
     // //check user input email-password
     // validateSubmit: function() {
     //   if (

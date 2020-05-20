@@ -1,12 +1,17 @@
 // routes.js
 import Home from '../components/Home.vue';
-import AddSchool from '../components/AddSchool.vue';
 import Login from '../components/Login.vue';
+
+//Users
 import collectdata from '../components/Collectdata.vue';
 import Profile from '../components/Profile.vue';
 import ShowStudent from '../components/ShowStudent.vue';
-import Signup from '../components/SignUp.vue';
 import Testlogin from '../components/testlogin.vue';
+import Testcsv from '../components/testcsv.vue'
+
+//Admin
+import AddUser from '../components/admin/adduser.vue';
+import AddSchool from '../components/admin/addschool.vue'
 
 const routes = [
     {
@@ -46,15 +51,21 @@ const routes = [
         component: ShowStudent
     },
     {
-        path: '/sign-up',
-        name: 'sign-up',
-        component: Signup
+        path: '/adduser',
+        name: 'adduser',
+        component: AddUser
     },
     {
         path: '/testlogin',
         name: 'testlogin',
         component: Testlogin
+    },
+    {
+        path: '/testcsv',
+        name: 'testcsv',
+        component: Testcsv
     }
+
 ];
 
 export default routes;

@@ -28,8 +28,9 @@
                 <tbody>
                     <div v-for="item in users" :key="item.id">
                     <tr>
+                    <th>{{id}}</th>
                     <th>{{item.studentid}}</th>
-                    <td>{{item.Name}}</td>
+                    <td>{{item.name}}</td>
                     <td>{{item.schoolid}}</td>
                     <td>{{item.grade}}</td>
                     <td>{{item.class}}</td>
@@ -50,11 +51,13 @@ export default {
   name: "app",
   data() {
     return {
-      users: []
+      users: [],
+      schools: []
     }
   },
   mounted() {
     this.retrieveUsers();
+    this.retrieveSchools();
   },
   methods: {
     retrieveUsers() {
@@ -67,18 +70,8 @@ export default {
           console.log(e);
         });
     },
-    getInputValue() {
-      // Selecting the input element and get its value
-      var inputVal = document.getElementById("myInput").value;
-
-      // Displaying the value
-      alert(inputVal);
-    },
-    handleClick: function() {
-      alert("test " + this.users[0].schoolid);
-    },
-    retrieveSchool() {
-      DataService.getSchoolById(this.users[0].schoolid)
+    retrieveSchools() {
+      DataService.getSchool(this.users[0].schoolid)
         .then(response => {
           this.schools = response.data;
           console.log(response.data);
@@ -86,7 +79,7 @@ export default {
         .catch(e => {
           console.log(e);
         });
-    }
+    },
   }
 };
 </script>
